@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=DVD
+comment1.params=title
+comment1.target=DVD(java.lang.String)
+comment2.params=
+comment2.target=double\ getPricePerDay()
+numComments=3

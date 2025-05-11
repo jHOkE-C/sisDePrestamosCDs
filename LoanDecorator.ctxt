@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=LoanDecorator
+comment1.params=loan
+comment1.target=LoanDecorator(ILoan)
+comment2.params=
+comment2.target=double\ calculateCost()
+numComments=3

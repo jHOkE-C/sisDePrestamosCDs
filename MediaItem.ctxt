@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=MediaItem
+comment1.params=title
+comment1.target=MediaItem(java.lang.String)
+comment2.params=
+comment2.target=java.lang.String\ getTitle()
+comment3.params=
+comment3.target=double\ getPricePerDay()
+numComments=4

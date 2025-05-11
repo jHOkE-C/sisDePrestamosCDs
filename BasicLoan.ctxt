@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=BasicLoan
+comment1.params=item\ days\ strategy
+comment1.target=BasicLoan(MediaItem,\ int,\ PricingStrategy)
+comment2.params=
+comment2.target=double\ calculateCost()
+numComments=3

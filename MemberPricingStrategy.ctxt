@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=MemberPricingStrategy
+comment1.params=item\ days
+comment1.target=double\ calculate(MediaItem,\ int)
+numComments=2
