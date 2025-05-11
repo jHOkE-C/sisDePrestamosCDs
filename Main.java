@@ -34,6 +34,7 @@ public class Main {
         }
 
         double cost = loan.calculateCost();
-        System.out.printf("Costo total para:"+media.getTitle()+"por:"+days+"días:"+cost);
+        System.out.println("Prestamo de el:"+media.getTitle()+" - por: "+days+"dias");
+        System.out.printf("Costo Total:"+cost);
     }
 }
