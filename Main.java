@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class Main {
@@ -6,35 +5,88 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("=== Préstamo DVDs/Blu-ray ===");
-        System.out.print("Tipo de medio (DVD/BluRay): ");
-        String type = sc.nextLine().trim();
 
-        System.out.print("Título: ");
-        String title = sc.nextLine().trim();
+        boolean right = false;
+        String title = "";
+        while (!right) {
+            System.out.print("Título: ");
+            title = sc.nextLine().trim();
+            if (!title.isEmpty()) {
+                right = true;
+            } else {
+                System.out.println("El título no puede estar vacío.");
+            }
+        }
 
+        right = false;
+        String type = "";
+        while (!right) {
+            System.out.print("Tipo de medio (DVD/BluRay): ");
+            type = sc.nextLine().trim();
+            if (type.equalsIgnoreCase("DVD") ||
+                type.equalsIgnoreCase("BluRay")) {
+                right = true;
+            } else {
+                System.out.println("Opción inválida. Debes escribir 'DVD' o 'BluRay'.");
+            }
+        }
+
+        // Creamos el MediaItem mediante Factory
         MediaFactory factory = type.equalsIgnoreCase("BluRay")
             ? new BluRayFactory()
             : new DVDFactory();
         MediaItem media = factory.createMedia(title);
 
-        System.out.print("Días de préstamo: ");
-        int days = Integer.parseInt(sc.nextLine().trim());
+        right = false;
+        int days = 0;
+        while (!right) {
+            System.out.print("Días de préstamo: ");
+            String line = sc.nextLine().trim();
+            try {
+                days = Integer.parseInt(line);
+                if (days > 0) {
+                    right = true;
+                } else {
+                    System.out.println("Debe ser un número entero mayor que 0.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Ingresa un número entero.");
+            }
+        }
 
-        System.out.print("¿Es socio? (s/n): ");
-        boolean isMember = sc.nextLine().equalsIgnoreCase("s");
+        boolean isMember = askYesNo(sc, "¿Es socio?");
+
+
+        // Elegimos la estrategia de precio
         PricingStrategy strat = isMember
             ? new MemberPricingStrategy()
             : new StandardPricingStrategy();
-
         ILoan loan = new BasicLoan(media, days, strat);
 
-        System.out.print("¿Añadir seguro (+2 Bs)? (s/n): ");
-        if (sc.nextLine().equalsIgnoreCase("s")) {
+        boolean withInsurance = askYesNo(sc, "¿Añadir seguro (+2 Bs)?");
+
+
+        if (withInsurance) {
             loan = new InsuranceDecorator(loan);
         }
 
         double cost = loan.calculateCost();
-        System.out.println("Prestamo de el:"+media.getTitle()+" - por: "+days+"dias");
-        System.out.printf("Costo Total:"+cost);
+        System.out.printf(
+            "Préstamo de \"%s\" por %d días: costo total = %.2f Bs%n",
+            media.getTitle(), days, cost
+        );
+    }
+    private static boolean askYesNo(Scanner sc, String prompt) {
+        while (true) {
+            System.out.print(prompt + " (s/n): ");
+            String resp = sc.nextLine().trim();
+            if (resp.equalsIgnoreCase("s")) {
+                return true;
+            } else if (resp.equalsIgnoreCase("n")) {
+                return false;
+            } else {
+                System.out.println("Opción inválida. Debes responder 's' o 'n'.");
+            }
+        }
     }
 }
