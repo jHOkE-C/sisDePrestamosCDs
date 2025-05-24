@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=MediaSimpleFactory
+comment1.params=
+comment1.target=MediaSimpleFactory()
+comment2.params=type\ title
+comment2.target=MediaItem\ create(java.lang.String,\ java.lang.String)
+numComments=3

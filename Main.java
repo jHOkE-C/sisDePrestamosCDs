@@ -31,11 +31,9 @@ public class Main {
             }
         }
 
-        // Creamos el MediaItem mediante Factory
-        MediaFactory factory = type.equalsIgnoreCase("BluRay")
-            ? new BluRayFactory()
-            : new DVDFactory();
-        MediaItem media = factory.createMedia(title);
+        //  ✅  Nuevo código
+        MediaItem media = MediaSimpleFactory.create(type, title);
+        
 
         right = false;
         int days = 0;
@@ -72,8 +70,7 @@ public class Main {
 
         double cost = loan.calculateCost();
         System.out.printf(
-            "Préstamo de \"%s\" por %d días: costo total = %.2f Bs%n",
-            media.getTitle(), days, cost
+            "Préstamo de"+media.getTitle()+" por"+ days +"días: costo total = "+cost+"Bs %n"
         );
     }
     private static boolean askYesNo(Scanner sc, String prompt) {
